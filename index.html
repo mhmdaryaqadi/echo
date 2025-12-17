@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="overflow: hidden;"> <div id="welcome-screen">
+        <div class="welcome-content">
+            <h1>Echo PH.</h1>
+            <p>Klik tombolnya woi</p>
+            <button id="enter-btn">yang ini</button>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">Echo PH.</div>
+        <div class="nav-right">
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#timeline">Perjalanan</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#pesan">Pesan</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button id="theme-toggle" class="theme-btn" title="Ganti Tema">☀️</button>
+                <div class="hamburger" id="hamburger-btn">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <video muted loop playsinline id="myVideo">
+            <source src="video/bg.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
+            <span class="badge">OFFICIAL SIRKEL</span>
+            <h1>KITA PERNAH <span class="highlight typing-text"></span></h1>
+            <p>Bukan sekadar teman sekelas, tapi ya cuma temen.</p>
+            <a href="#galeri" class="btn-glow">Jelajahi Waktu</a>
+        </div>
+    </header>
+
+    <section id="timeline" class="timeline-section">
+        <h2 data-aos="fade-up">Garis Waktu</h2>
+        <div class="timeline">
+            <div class="timeline-item left" data-aos="fade-right">
+                <div class="content">
+                    <h3>2021</h3>
+                    <p>Pertama kali kenal om gilang dengan wajah jakamnya.</p>
+                </div>
+            </div>
+            <div class="timeline-item right" data-aos="fade-left">
+                <div class="content">
+                    <h3>2022 - 2023</h3>
+                    <p>Mulai sirkelan.</p>
+                </div>
+            </div>
+            <div class="timeline-item left" data-aos="fade-right">
+                <div class="content">
+                    <h3>2024</h3>
+                    <p>Pengangguran.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeri" class="gallery-section">
+        <h2 data-aos="fade-up">Memo</h2>
+        <div class="masonry-grid">
+            <div class="masonry-item" data-aos="zoom-in"><img src="foto/kencing.jpg" alt="Foto"></div>
+            <div class="masonry-item" data-aos="zoom-in"><img src="foto/1.JPG" alt="Foto"></div>
+            <div class="masonry-item" data-aos="zoom-in"><img src="foto/9.jpeg" alt="Foto"></div>
+            <div class="masonry-item" data-aos="zoom-in"><img src="foto/eko.JPG" alt="Foto"></div>
+            <div class="masonry-item" data-aos="zoom-in"><img src="foto/5.jpeg" alt="Foto"></div>
+            <div class="masonry-item" data-aos="zoom-in"><img src="foto/11.jpeg" alt="Foto"></div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="video-wrapper vertical-video" data-aos="fade-up">
+            <video width="100%" height="100%" autoplay muted loop playsinline style="object-fit: cover;">
+                <source src="video/iam.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <section id="pesan" class="messages-section">
+        <h2 data-aos="fade-up">Kata Bocah</h2>
+        <div class="scrolling-container"> <div class="scrolling-wrapper">
+                <div class="card" data-aos="flip-up">
+                    <div class="profile-icon">A</div>
+                    <p>"info gunung lah"</p>
+                    <h5>- Rizki (Sipaling gunung)</h5>
+                </div>
+                <div class="card" data-aos="flip-up" data-aos-delay="100">
+                    <div class="profile-icon">B</div>
+                    <p>"Ajak gua lah."</p>
+                    <h5>- Panji</h5>
+                </div>
+                <div class="card" data-aos="flip-up" data-aos-delay="200">
+                    <div class="profile-icon">C</div>
+                    <p>"cukup tau."</p>
+                    <h5>- Tulus</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>Echo PH International.</h3>
+        <p>Created with by AL.</p>
+    </footer>
+
+    <div class="music-fab" style="display: none;"> <button id="music-btn">⏸</button> <audio id="bg-music" loop>
+            <source src="lagu/masa.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
