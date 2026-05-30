@@ -2,6 +2,35 @@
 AOS.init({ once: true, offset: 20 });
 
 // =========================================
+// DEFAULT DATA INITIALIZATION
+// =========================================
+const defaultTimeline = [
+    { year: "2021", text: "Pertama kali kenal om gilang dengan wajah jakamnya." },
+    { year: "2022 - 2023", text: "Maennya sirkel." },
+    { year: "2024", text: "Pengangguran." }
+];
+const defaultMessages = [
+    { name: "Rizki (Sipaling gunung)", message: "info gunung, mas" },
+    { name: "Panji", message: "Ajak gua lah." },
+    { name: "Tulus", message: "cukup tau." }
+];
+const defaultGallery = [
+    { url: "foto/3.jpg" }, { url: "foto/1.JPG" }, { url: "foto/9.jpeg" }, { url: "foto/eko.JPG" },
+    { url: "foto/5.jpeg" }, { url: "foto/11.jpeg" }, { url: "foto/4.jpeg" }, { url: "foto/6.jpeg" },
+    { url: "foto/7.jpeg" }, { url: "foto/8.jpeg" }, { url: "foto/10.jpeg" }, { url: "foto/12.jpeg" }
+];
+const defaultVideo = [
+    { url: "video/2.mp4" },
+    { url: "video/1.mp4" }
+];
+
+if (!localStorage.getItem('timelineData')) localStorage.setItem('timelineData', JSON.stringify(defaultTimeline));
+if (!localStorage.getItem('messagesData')) localStorage.setItem('messagesData', JSON.stringify(defaultMessages));
+if (!localStorage.getItem('galleryData')) localStorage.setItem('galleryData', JSON.stringify(defaultGallery));
+if (!localStorage.getItem('videoData')) localStorage.setItem('videoData', JSON.stringify(defaultVideo));
+
+
+// =========================================
 // LOGIN LOGIC
 // =========================================
 const loginBtn = document.getElementById('login-btn');
@@ -54,6 +83,19 @@ navItems.forEach(item => {
         document.getElementById(targetId).style.display = 'block';
     });
 });
+
+// =========================================
+// RESET DATA
+// =========================================
+const btnResetData = document.getElementById('btn-reset-data');
+if (btnResetData) {
+    btnResetData.addEventListener('click', () => {
+        if (confirm('Yakin ingin mereset semua data kembali ke awal? Semua perubahan (foto/pesan) yang Anda buat akan hilang!')) {
+            localStorage.clear();
+            location.reload();
+        }
+    });
+}
 
 // =========================================
 // CRUD LOGIC: TIMELINE
@@ -249,10 +291,11 @@ const modalGalleryTitle = document.getElementById('modal-gallery-title');
 function renderGalleryTable() {
     galleryTableBody.innerHTML = '';
     galleryData.forEach((item, index) => {
+        const displayUrl = item.url.length > 40 ? item.url.substring(0, 40) + '...' : item.url;
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${index + 1}</td>
-            <td><img src="${item.url}" alt="Preview" style="height: 50px; border-radius: 8px; object-fit: cover;"> <br> <small>${item.url}</small></td>
+            <td><img src="${item.url}" alt="Preview" style="height: 50px; border-radius: 8px; object-fit: cover;"> <br> <small>${displayUrl}</small></td>
             <td>
                 <button class="btn-edit" onclick="editGallery(${index})">Edit</button>
                 <button class="btn-delete" onclick="deleteGallery(${index})">Hapus</button>
@@ -351,10 +394,11 @@ const modalVideoTitle = document.getElementById('modal-video-title');
 function renderVideoTable() {
     videoTableBody.innerHTML = '';
     videoData.forEach((item, index) => {
+        const displayUrl = item.url.length > 40 ? item.url.substring(0, 40) + '...' : item.url;
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${index + 1}</td>
-            <td><video src="${item.url}" style="height: 50px; border-radius: 8px; object-fit: cover;" muted></video> <br> <small>${item.url}</small></td>
+            <td><video src="${item.url}" style="height: 50px; border-radius: 8px; object-fit: cover;" muted></video> <br> <small>${displayUrl}</small></td>
             <td>
                 <button class="btn-edit" onclick="editVideo(${index})">Edit</button>
                 <button class="btn-delete" onclick="deleteVideo(${index})">Hapus</button>
