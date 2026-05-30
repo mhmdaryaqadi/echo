@@ -113,3 +113,136 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         navMenu.classList.remove('active');
     });
 });
+
+// 7. Dynamic Content (Timeline & Messages) from LocalStorage
+
+// Data Default
+const defaultTimeline = [
+    { year: "2021", text: "Pertama kali kenal om gilang dengan wajah jakamnya." },
+    { year: "2022 - 2023", text: "Maennya sirkel." },
+    { year: "2024", text: "Pengangguran." }
+];
+
+const defaultMessages = [
+    { name: "Rizki (Sipaling gunung)", message: "info gunung, mas" },
+    { name: "Panji", message: "Ajak gua lah." },
+    { name: "Tulus", message: "cukup tau." }
+];
+
+// Data Default Foto & Video
+const defaultGallery = [
+    { url: "foto/3.jpg" }, { url: "foto/1.JPG" }, { url: "foto/9.jpeg" }, { url: "foto/eko.JPG" },
+    { url: "foto/5.jpeg" }, { url: "foto/11.jpeg" }, { url: "foto/4.jpeg" }, { url: "foto/6.jpeg" },
+    { url: "foto/7.jpeg" }, { url: "foto/8.jpeg" }, { url: "foto/10.jpeg" }, { url: "foto/12.jpeg" }
+];
+
+const defaultVideo = [
+    { url: "video/2.mp4" },
+    { url: "video/1.mp4" }
+];
+
+// Initialize Data if not exists
+if (!localStorage.getItem('timelineData')) {
+    localStorage.setItem('timelineData', JSON.stringify(defaultTimeline));
+}
+if (!localStorage.getItem('messagesData')) {
+    localStorage.setItem('messagesData', JSON.stringify(defaultMessages));
+}
+if (!localStorage.getItem('galleryData')) {
+    localStorage.setItem('galleryData', JSON.stringify(defaultGallery));
+}
+if (!localStorage.getItem('videoData')) {
+    localStorage.setItem('videoData', JSON.stringify(defaultVideo));
+}
+
+// Render Timeline
+function renderTimeline() {
+    const timelineContainer = document.getElementById('timeline-container');
+    if(!timelineContainer) return;
+    
+    const timelineData = JSON.parse(localStorage.getItem('timelineData')) || [];
+    timelineContainer.innerHTML = '';
+    
+    timelineData.forEach((item, index) => {
+        const position = index % 2 === 0 ? 'left' : 'right';
+        const animation = index % 2 === 0 ? 'fade-right' : 'fade-left';
+        
+        const html = `
+            <div class="timeline-item ${position}" data-aos="${animation}">
+                <div class="content">
+                    <h3>${item.year}</h3>
+                    <p>${item.text}</p>
+                </div>
+            </div>
+        `;
+        timelineContainer.innerHTML += html;
+    });
+}
+
+// Render Messages
+function renderMessages() {
+    const messagesContainer = document.getElementById('messages-container');
+    if(!messagesContainer) return;
+    
+    const messagesData = JSON.parse(localStorage.getItem('messagesData')) || [];
+    messagesContainer.innerHTML = '';
+    
+    messagesData.forEach((item, index) => {
+        const delay = index * 100;
+        const initial = item.name.charAt(0).toUpperCase();
+        const html = `
+            <div class="card" data-aos="flip-up" data-aos-delay="${delay}">
+                <div class="profile-icon">${initial}</div>
+                <p>"${item.message}"</p>
+                <h5>- ${item.name}</h5>
+            </div>
+        `;
+        messagesContainer.innerHTML += html;
+    });
+}
+
+// Render Gallery
+function renderGallery() {
+    const galleryContainer = document.getElementById('gallery-container');
+    if(!galleryContainer) return;
+    
+    const galleryData = JSON.parse(localStorage.getItem('galleryData')) || [];
+    galleryContainer.innerHTML = '';
+    
+    galleryData.forEach((item) => {
+        const html = `
+            <div class="masonry-item" data-aos="zoom-in">
+                <img src="${item.url}" alt="Foto">
+            </div>
+        `;
+        galleryContainer.innerHTML += html;
+    });
+}
+
+// Render Video
+function renderVideo() {
+    const videoContainer = document.getElementById('video-container');
+    if(!videoContainer) return;
+    
+    const videoData = JSON.parse(localStorage.getItem('videoData')) || [];
+    videoContainer.innerHTML = '';
+    
+    videoData.forEach((item) => {
+        const html = `
+            <div class="video-wrapper vertical-video" data-aos="fade-up">
+                <video width="100%" height="100%" autoplay muted loop playsinline style="object-fit: cover;">
+                    <source src="${item.url}" type="video/mp4">
+                </video>
+            </div>
+        `;
+        videoContainer.innerHTML += html;
+    });
+}
+
+// Execute render on DOM loaded
+document.addEventListener('DOMContentLoaded', () => {
+    renderTimeline();
+    renderMessages();
+    renderGallery();
+    renderVideo();
+});

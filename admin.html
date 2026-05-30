@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- Overlay Login -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-card" data-aos="zoom-in">
+            <h2>Echo Admin.</h2>
+            <p>Masukkan password untuk melanjutkan</p>
+            <input type="password" id="admin-password" placeholder="Password (bebas)">
+            <button id="login-btn">Masuk</button>
+            <p id="login-error" style="color: #ff4757; font-size: 12px; margin-top: 10px; display: none;">Password salah!</p>
+            <a href="index.html" class="back-link">Kembali ke Home</a>
+        </div>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div id="dashboard" class="dashboard-container" style="display: none;">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">Echo<span>.</span></div>
+            <ul class="nav-menu">
+                <li class="active" data-tab="timeline-tab">Garis Waktu</li>
+                <li data-tab="messages-tab">Kata Bocah</li>
+                <li data-tab="gallery-tab">Memo / Galeri</li>
+                <li data-tab="video-tab">Video</li>
+            </ul>
+            <div class="sidebar-bottom">
+                <a href="index.html" class="logout-btn">← Kembali Web</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Dashboard Admin</h1>
+                <div class="user-info">
+                    Admin <a href="index.html" style="margin-left: 8px; color: #fca5a5; text-decoration: none; font-size: 0.8rem; font-weight: 600;">[Keluar]</a>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                
+                <!-- TIMELINE SECTION -->
+                <section id="timeline-tab" class="tab-content active" data-aos="fade-up">
+                    <div class="section-header">
+                        <h2>Manajemen Garis Waktu</h2>
+                        <button class="btn-primary" id="btn-add-timeline">+ Tambah Data</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="timeline-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tahun</th>
+                                    <th>Deskripsi</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dimuat via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- MESSAGES SECTION -->
+                <section id="messages-tab" class="tab-content" style="display: none;">
+                    <div class="section-header">
+                        <h2>Manajemen Kata Bocah</h2>
+                        <button class="btn-primary" id="btn-add-message">+ Tambah Data</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="messages-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Pesan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dimuat via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- GALLERY SECTION -->
+                <section id="gallery-tab" class="tab-content" style="display: none;">
+                    <div class="section-header">
+                        <h2>Manajemen Memo / Galeri</h2>
+                        <button class="btn-primary" id="btn-add-gallery">+ Tambah Foto</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="gallery-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Preview / URL</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dimuat via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- VIDEO SECTION -->
+                <section id="video-tab" class="tab-content" style="display: none;">
+                    <div class="section-header">
+                        <h2>Manajemen Video</h2>
+                        <button class="btn-primary" id="btn-add-video">+ Tambah Video</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="video-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Preview / URL</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dimuat via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Modal Timeline -->
+    <div id="modal-timeline" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-timeline-title">Tambah Garis Waktu</h3>
+            <input type="hidden" id="timeline-index">
+            <div class="form-group">
+                <label>Tahun</label>
+                <input type="text" id="timeline-year" placeholder="Contoh: 2025">
+            </div>
+            <div class="form-group">
+                <label>Deskripsi</label>
+                <textarea id="timeline-desc" rows="3" placeholder="Masukkan cerita..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="btn-cancel-timeline">Batal</button>
+                <button class="btn-primary" id="btn-save-timeline">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Message -->
+    <div id="modal-message" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-message-title">Tambah Pesan</h3>
+            <input type="hidden" id="message-index">
+            <div class="form-group">
+                <label>Nama Pengirim</label>
+                <input type="text" id="message-name" placeholder="Contoh: Budi">
+            </div>
+            <div class="form-group">
+                <label>Isi Pesan</label>
+                <textarea id="message-text" rows="3" placeholder="Masukkan pesan..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="btn-cancel-message">Batal</button>
+                <button class="btn-primary" id="btn-save-message">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Gallery -->
+    <div id="modal-gallery" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-gallery-title">Tambah Foto</h3>
+            <input type="hidden" id="gallery-index">
+            <div class="form-group">
+                <label>Upload File Foto (Otomatis disimpan di browser)</label>
+                <input type="file" id="gallery-file" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label>Atau ketik Path / URL Foto (Manual)</label>
+                <input type="text" id="gallery-url" placeholder="Contoh: foto/1.JPG atau https://...">
+                <small style="color:#94a3b8; font-size: 12px;">*Jika sudah upload file, ini boleh dikosongkan.</small>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="btn-cancel-gallery">Batal</button>
+                <button class="btn-primary" id="btn-save-gallery">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Video -->
+    <div id="modal-video" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-video-title">Tambah Video</h3>
+            <input type="hidden" id="video-index">
+            <div class="form-group">
+                <label>Upload File Video (Perhatian: Max ~2MB)</label>
+                <input type="file" id="video-file" accept="video/*">
+            </div>
+            <div class="form-group">
+                <label>Atau ketik Path / URL Video (Disarankan untuk video besar)</label>
+                <input type="text" id="video-url" placeholder="Contoh: video/1.mp4 atau https://...">
+                <small style="color:#94a3b8; font-size: 12px;">*Jika video terlalu besar, disarankan ketik manual.</small>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="btn-cancel-video">Batal</button>
+                <button class="btn-primary" id="btn-save-video">Simpan</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
