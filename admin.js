@@ -7,12 +7,13 @@ AOS.init({ once: true, offset: 20 });
 const loginBtn = document.getElementById('login-btn');
 const loginOverlay = document.getElementById('login-overlay');
 const dashboard = document.getElementById('dashboard');
+const usernameInput = document.getElementById('admin-username');
 const passwordInput = document.getElementById('admin-password');
 const loginError = document.getElementById('login-error');
 
-// Simple Login (Password: admin123)
+// Simple Login
 loginBtn.addEventListener('click', () => {
-    if (passwordInput.value === 'admin123' || passwordInput.value.trim() !== '') {
+    if (usernameInput.value === 'admin' && passwordInput.value === 'admin') {
         loginOverlay.style.opacity = '0';
         setTimeout(() => {
             loginOverlay.style.display = 'none';
